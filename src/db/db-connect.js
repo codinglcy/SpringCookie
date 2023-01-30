@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import mysql from 'mysql2';
-// import { config } from '../../config';
 
 const dbcon = mysql.createConnection({
 	host: 'localhost',
