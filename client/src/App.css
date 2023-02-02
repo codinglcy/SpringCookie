@@ -1,4 +1,36 @@
-.App {
+.App-header {
+	min-height: 20vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-top: 10px;
+}
+
+.App-title {
+	font-family: 'Nanum Gothic Coding';
+	/* font-style: normal; */
+	/* font-weight: 100; */
+	font-size: 85px;
+	line-height: 100px;
+	/* identical to box height */
+
+	text-align: center;
+
+	color: #f06292;
+}
+.apptitle {
+	font-family: 'Kiwi Maru';
+	color: #ffcadc;
+	font-size: 100px;
+}
+
+/* @font-face {
+	font-family: 'appTitleFont';
+	src: url('./fonts/백제m-babosorry.ttf');
+} */
+
+/* .App {
 	text-align: center;
 }
 
@@ -35,4 +67,4 @@
 	to {
 		transform: rotate(360deg);
 	}
-}
+} */

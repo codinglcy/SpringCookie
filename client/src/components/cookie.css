@@ -1,0 +1,45 @@
+.Container {
+	min-height: 73vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.CookieImg {
+	width: 350px;
+	height: 350px;
+	vertical-align: middle;
+	cursor: pointer;
+
+	filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.LuckyWord {
+	position: absolute;
+	width: 350px;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+}
+
+.Kor {
+	font-size: 60px;
+	margin: -20px;
+	color: #494949;
+}
+
+.Eng {
+	font-size: 50px;
+	margin: -30px;
+	color: #494949;
+}
+
+.Mean {
+	font-size: 35px;
+	margin: 15px;
+	color: #616060;
+}
