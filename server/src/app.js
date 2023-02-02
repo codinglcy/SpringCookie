@@ -12,9 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //api라우팅
-app.use('/api', (req, res) => {
-	res.status(201).json({ data: 'Hello World' });
-});
 app.use('/api/word', wordRouter);
 app.use('/api/result', luckyResultRouter);
 
