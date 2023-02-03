@@ -24,9 +24,11 @@ const ResultBox = () => {
 						);
 					})}
 				</div>
-				<button className="ResetButton">
-					<div className="Reset">다른 쿠키 열어보기</div>
-				</button>
+				<a href="http://localhost:3000/result" className="ResetAtag">
+					<button className="ResetButton">
+						<div className="Reset">다른 쿠키 열어보기</div>
+					</button>
+				</a>
 			</div>
 		</div>
 	);

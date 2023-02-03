@@ -13,24 +13,28 @@ const Cookie = () => {
 
 	return (
 		<div className="Container">
-			<img
-				className="CookieImg"
-				src="../fortune-cookie-emoji-clipart-lg.png"
-				alt="포춘쿠키이미지"
-			/>
+			<a href="http://localhost:3000/result" className="CookieATag">
+				<img
+					className="CookieImg"
+					src="../fortune-cookie-emoji-clipart-lg.png"
+					alt="포춘쿠키이미지"
+				/>
+			</a>
 			<div className="LuckyWord">
-				<p className="Kor">"{luckyword.kor}"</p>
-				<p className="Eng">{luckyword.eng}</p>
-				<p className="Mean">
-					{(luckyword.mean || '').split('\\n').map((line, index) => {
-						return (
-							<span key={index}>
-								{line}
-								<br />
-							</span>
-						);
-					})}
-				</p>
+				<a href="http://localhost:3000/result" className="CookieATag">
+					<p className="Kor">"{luckyword.kor}"</p>
+					<p className="Eng">{luckyword.eng}</p>
+					<p className="Mean">
+						{(luckyword.mean || '').split('\\n').map((line, index) => {
+							return (
+								<span key={index}>
+									{line}
+									<br />
+								</span>
+							);
+						})}
+					</p>
+				</a>
 			</div>
 		</div>
 	);

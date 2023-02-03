@@ -7,6 +7,10 @@
 	position: relative;
 }
 
+.CookieATag {
+	text-decoration: none;
+}
+
 .CookieImg {
 	width: 350px;
 	height: 350px;

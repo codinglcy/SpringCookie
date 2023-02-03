@@ -38,6 +38,11 @@
 	height: 24px;
 	cursor: pointer;
 }
+
+.ResetAtag {
+	text-decoration: none;
+}
+
 .Reset {
 	margin-top: -5px;
 	font-size: 20px;

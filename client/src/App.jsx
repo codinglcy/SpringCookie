@@ -10,7 +10,9 @@ function App() {
 		<BrowserRouter>
 			<header className="App-header">
 				<div className="App-title">
-					for<span className="apptitle">春</span>쿠키
+					<a href="http://localhost:3000/" className="TitleAtag">
+						for<span className="apptitle">春</span>쿠키
+					</a>
 				</div>
 			</header>
 
