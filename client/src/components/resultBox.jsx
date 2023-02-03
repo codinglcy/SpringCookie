@@ -4,9 +4,10 @@ import axios from 'axios';
 
 const ResultBox = () => {
 	const [luckyresult, setLuckyresult] = useState('');
+	localStorage.setItem('LuckyResult', luckyresult.split('\\n').join(' '));
 
-	const getResult = () => {
-		axios.get('/api/result').then((res) => {
+	const getResult = async () => {
+		await axios.get('/api/result').then((res) => {
 			setLuckyresult(res.data[0].sentence);
 		});
 	};
@@ -28,14 +29,11 @@ const ResultBox = () => {
 						);
 					})}
 				</div>
-				<button
-					className="ResetButton"
-					onClick={() => {
-						getResult();
-					}}
-				>
-					<div className="Reset">다른 쿠키 열어보기</div>
-				</button>
+				<a href="http://localhost:3000/result">
+					<button className="ResetButton">
+						<div className="Reset">다른 쿠키 열어보기</div>
+					</button>
+				</a>
 			</div>
 		</div>
 	);

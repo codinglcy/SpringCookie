@@ -1,5 +1,3 @@
-// import { useEffect } from 'react';
-// import axios from 'axios';
 import './App.css';
 import MainPage from './page/Main';
 import ResultPage from './page/Result';
