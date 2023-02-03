@@ -5,10 +5,14 @@ import axios from 'axios';
 const ResultBox = () => {
 	const [luckyresult, setLuckyresult] = useState('');
 
-	useEffect(() => {
+	const getResult = () => {
 		axios.get('/api/result').then((res) => {
 			setLuckyresult(res.data[0].sentence);
 		});
+	};
+
+	useEffect(() => {
+		getResult();
 	}, [setLuckyresult]);
 
 	return (
@@ -24,11 +28,14 @@ const ResultBox = () => {
 						);
 					})}
 				</div>
-				<a href="http://localhost:3000/result" className="ResetAtag">
-					<button className="ResetButton">
-						<div className="Reset">다른 쿠키 열어보기</div>
-					</button>
-				</a>
+				<button
+					className="ResetButton"
+					onClick={() => {
+						getResult();
+					}}
+				>
+					<div className="Reset">다른 쿠키 열어보기</div>
+				</button>
 			</div>
 		</div>
 	);
