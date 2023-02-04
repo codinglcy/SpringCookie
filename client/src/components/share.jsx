@@ -1,6 +1,18 @@
 import './share.css';
+import { TwitterIcon, TwitterShareButton } from 'react-share';
+import { useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const ShareBox = () => {
+	const SpringCookieUrl = 'http://localhost:3000/';
+	const [result, setResult] = useState('');
+
+	useEffect(() => {
+		setTimeout(() => {
+			setResult(localStorage.getItem('LuckyResult'));
+		}, 300);
+	});
+
 	const createKakaoButton = () => {
 		if (window.Kakao) {
 			const kakao = window.Kakao;
@@ -11,10 +23,10 @@ const ShareBox = () => {
 
 			kakao.Share.sendDefault({
 				objectType: 'text',
-				text: localStorage.getItem('LuckyResult'),
+				text: result,
 				link: {
-					mobileWebUrl: 'http://localhost:3000',
-					webUrl: 'http://localhost:3000',
+					mobileWebUrl: SpringCookieUrl,
+					webUrl: SpringCookieUrl,
 				},
 			});
 		}
@@ -37,8 +49,22 @@ const ShareBox = () => {
 						/>
 					</button>
 				</div>
-				<button className="TwitterShare"></button>
-				<button className="LinkCopy"></button>
+
+				<div className="TwitterShare">
+					<TwitterShareButton url={SpringCookieUrl} title={result}>
+						<TwitterIcon
+							className="TwitterShareIcon"
+							size={37}
+							borderRadius={10}
+						></TwitterIcon>
+					</TwitterShareButton>
+				</div>
+
+				<div className="LinkCopy">
+					<CopyToClipboard text={SpringCookieUrl}>
+						<button className="urlBtn">URL</button>
+					</CopyToClipboard>
+				</div>
 			</div>
 		</div>
 	);

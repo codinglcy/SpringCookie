@@ -45,3 +45,53 @@
 	color: #616060;
 	font-family: 'Dongle';
 }
+
+@media (max-width: 500px) {
+	.Container {
+		min-height: 68vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-top: 10px;
+	}
+
+	.TextBox {
+		position: relative;
+		width: 280px;
+		height: 320px;
+
+		background: #ffffff;
+		box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+		border-radius: 57px;
+	}
+
+	.Result {
+		position: absolute;
+		text-align: center;
+		width: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 25px;
+		color: #494949;
+	}
+
+	.ResetButton {
+		position: absolute;
+		bottom: 8%;
+		right: 5%;
+		border: none;
+		background-color: transparent;
+		width: 100px;
+		height: 24px;
+		cursor: pointer;
+	}
+
+	.Reset {
+		margin-top: -5px;
+		font-size: 18px;
+		color: #616060;
+		font-family: 'Dongle';
+	}
+}
