@@ -5,8 +5,8 @@ sudo: required
 services:
   - docker
 
-# script:
-#   - docker run -e CI=true codinglcy/SpringCookie npm run start
+script:
+  - docker run -e CI=true codinglcy/SpringCookie npm run start
 
 after_success:
   #각 이미지 빌드
