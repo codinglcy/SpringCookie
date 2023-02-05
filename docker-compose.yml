@@ -1,0 +1,32 @@
+version: '3'
+services:
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - client/node_modules
+      - ./client:/client
+    expose:
+      - 3000
+    container_name: client
+    stdin_open: true
+
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    volumes:
+      - server/node_modules
+      - ./server:/server
+    expose:
+      - 5000
+    container_name: server
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    container_name: nginx
+    ports: -"3000:80"
