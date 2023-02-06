@@ -59,4 +59,14 @@ jobs:
       run: |
         docker build -t lcyl/springcookie-nginx ./nginx
         docker push lcyl/springcookie-nginx
-      
+
+    - name: Beanstalk Deploy
+      uses: einaregilsson/beanstalk-deploy@v10
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: "ap-northeast-2"
+        application_name: "SpringCookie"
+        environment_name: "Springcookie-env"
+        
+    
