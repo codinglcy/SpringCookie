@@ -23,6 +23,28 @@ jobs:
         username: ${{ secrets. DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
+    - name: add .env for client
+      run: |
+        echo "REACT_APP_KAKAO_JS_KEY=$REACT_APP_KAKAO_JS_KEY" >> .env
+      working-directory: ./client
+      env:
+        REACT_APP_KAKAO_JS_KEY: ${{ secrets.REACT_APP_KAKAO_JS_KEY }}
+    
+    - name: add .env for server
+      run: |
+        echo "MYSQL_HOST=$MYSQL_HOST" >> .env
+        echo "MYSQL_PORT=$MYSQL_PORT" >> .env
+        echo "MYSQL_USER=$MYSQL_USER" >> .env
+        echo "MYSQL_PASSWORD=$MYSQL_PASSWORD" >> .env
+        echo "MYSQL_DATABASE=$MYSQL_DATABASE" >> .env
+      working-directory: ./server
+      env:
+        MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+        MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+        MYSQL_USER: ${{ secrets.MYSQL_USER }}
+        MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+        MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+    
     - name: client build and push
       run: |
         docker build -t lcyl/springcookie-client ./client
