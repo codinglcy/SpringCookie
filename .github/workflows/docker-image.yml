@@ -23,9 +23,8 @@ jobs:
         username: ${{ secrets. DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
-    - name: sudo
-      run: sudo docker-compose -f /home/ubuntu/srv/ubuntu/docker-compose.prod.yml up --build -d
-    
     - name: Build and push
-      run: docker-compose up --build
+      uses: docker/build-push-action@v2
+      with:
+        push: true
       
