@@ -11,8 +11,6 @@ services:
       - 3000
     container_name: client
     stdin_open: true
-    environment:
-      - REACT_APP_KAKAO_JS_KEY = $REACT_APP_KAKAO_JS_KEY
 
   server:
     build:
@@ -24,12 +22,6 @@ services:
     expose:
       - 5000
     container_name: server
-    environment:
-      - MYSQL_HOST = $MYSQL_HOST
-      - MYSQL_PORT = $MYSQL_PORT
-      - MYSQL_USER = $MYSQL_USER
-      - MYSQL_PASSWORD = $MYSQL_PASSWORD
-      - MYSQL_DATABASE = $MYSQL_DATABASE
 
   nginx:
     restart: always
