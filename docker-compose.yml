@@ -11,6 +11,7 @@ services:
       - 3000
     container_name: client
     stdin_open: true
+    env_file: .env
 
   server:
     build:
@@ -22,6 +23,7 @@ services:
     expose:
       - 5000
     container_name: server
+    env_file: .env
 
   nginx:
     restart: always
