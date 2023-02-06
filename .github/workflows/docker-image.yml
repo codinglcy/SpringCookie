@@ -59,7 +59,17 @@ jobs:
       run: |
         docker build -t lcyl/springcookie-nginx ./nginx
         docker push lcyl/springcookie-nginx
-
+        
+    - name: Get current time
+      uses: 1466587594/get-current-time@v2
+      id: current-time
+      with:
+        format: YYYY-MM-DDTHH-mm-ss
+        utcOffset: "+09:00"
+    
+    - name: Generate Deployment Package
+      run: zip -r deploy.zip * -x '*.git*'
+        
     - name: Beanstalk Deploy
       uses: einaregilsson/beanstalk-deploy@v10
       with:
@@ -68,6 +78,7 @@ jobs:
         region: "ap-northeast-2"
         application_name: "SpringCookie"
         environment_name: "Springcookie-env"
-        version_label: "v1"
+        version_label: ${{steps.current-time.outputs.formattedTime}}
+        deployment_package: deploy.zip
         
     
