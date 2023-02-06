@@ -25,16 +25,16 @@ jobs:
     
     - name: client build and push
       run: |
-        docker build -t springcookie/client ./client
+        docker build -t lcyl/springcookie-client ./client
         docker push lcyl/springcookie-client
     
     - name: server build and push
       run: |
-        docker build -t springcookie/server ./server
+        docker build -t lcyl/springcookie-server ./server
         docker push lcyl/springcookie-server
     
     - name: nginx build and push
       run: |
-        docker build -t springcookie/nginx ./nginx
+        docker build -t lcyl/springcookie-nginx ./nginx
         docker push lcyl/springcookie-nginx
       
