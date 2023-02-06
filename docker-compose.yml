@@ -31,4 +31,5 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     container_name: nginx
-    ports: -"3000:80"
+    ports:
+      - '3000:80'
