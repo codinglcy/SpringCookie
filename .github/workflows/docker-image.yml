@@ -2,83 +2,79 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-    
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets. DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
-    - name: add .env for client
-      run: |
-        echo "REACT_APP_KAKAO_JS_KEY=$REACT_APP_KAKAO_JS_KEY" >> .env
-      working-directory: ./client
-      env:
-        REACT_APP_KAKAO_JS_KEY: ${{ secrets.REACT_APP_KAKAO_JS_KEY }}
-    
-    - name: add .env for server
-      run: |
-        echo "MYSQL_HOST=$MYSQL_HOST" >> .env
-        echo "MYSQL_PORT=$MYSQL_PORT" >> .env
-        echo "MYSQL_USER=$MYSQL_USER" >> .env
-        echo "MYSQL_PASSWORD=$MYSQL_PASSWORD" >> .env
-        echo "MYSQL_DATABASE=$MYSQL_DATABASE" >> .env
-      working-directory: ./server
-      env:
-        MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-        MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
-        MYSQL_USER: ${{ secrets.MYSQL_USER }}
-        MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-        MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-    
-    - name: client build and push
-      run: |
-        docker build -t lcyl/springcookie-client ./client
-        docker push lcyl/springcookie-client
-    
-    - name: server build and push
-      run: |
-        docker build -t lcyl/springcookie-server ./server
-        docker push lcyl/springcookie-server
-    
-    - name: nginx build and push
-      run: |
-        docker build -t lcyl/springcookie-nginx ./nginx
-        docker push lcyl/springcookie-nginx
-        
-    - name: Get current time
-      uses: 1466587594/get-current-time@v2
-      id: current-time
-      with:
-        format: YYYY-MM-DDTHH-mm-ss
-        utcOffset: "+09:00"
-    
-    - name: Generate Deployment Package
-      run: zip -r deploy.zip * -x '*.git*'
-        
-    - name: Beanstalk Deploy
-      uses: einaregilsson/beanstalk-deploy@v10
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: "ap-northeast-2"
-        application_name: "SpringCookie"
-        environment_name: "Springcookie-env"
-        version_label: ${{steps.current-time.outputs.formattedTime}}
-        deployment_package: deploy.zip
-        
-    
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets. DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: add .env for client
+        run: |
+          echo "REACT_APP_KAKAO_JS_KEY=$REACT_APP_KAKAO_JS_KEY" >> .env
+        working-directory: ./client
+        env:
+          REACT_APP_KAKAO_JS_KEY: ${{ secrets.REACT_APP_KAKAO_JS_KEY }}
+
+      - name: add .env for server
+        run: |
+          echo "MYSQL_HOST=$MYSQL_HOST" >> .env
+          echo "MYSQL_PORT=$MYSQL_PORT" >> .env
+          echo "MYSQL_USER=$MYSQL_USER" >> .env
+          echo "MYSQL_PASSWORD=$MYSQL_PASSWORD" >> .env
+          echo "MYSQL_DATABASE=$MYSQL_DATABASE" >> .env
+        working-directory: ./server
+        env:
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+
+      - name: client build and push
+        run: |
+          docker build -t lcyl/springcookie-client ./client
+          docker push lcyl/springcookie-client
+
+      - name: server build and push
+        run: |
+          docker build -t lcyl/springcookie-server ./server
+          docker push lcyl/springcookie-server
+
+      - name: nginx build and push
+        run: |
+          docker build -t lcyl/springcookie-nginx ./nginx
+          docker push lcyl/springcookie-nginx
+
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: '+09:00'
+
+      - name: Generate Deployment Package
+        run: zip -r deploy-${{steps.current-time.outputs.formattedTime}}.zip * -x '*.git*'
+
+      - name: Beanstalk Deploy
+        uses: einaregilsson/beanstalk-deploy@v10
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: 'ap-northeast-2'
+          application_name: 'SpringCookie'
+          environment_name: 'Springcookie-env'
+          version_label: ${{steps.current-time.outputs.formattedTime}}
+          deployment_package: deploy-${{steps.current-time.outputs.formattedTime}}.zip
