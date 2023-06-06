@@ -32,7 +32,7 @@
 <br>
 <br>
 
-## API 주소
+## API 문서
 https://documenter.getpostman.com/view/20119504/2s935iu6ba
 
 <br>
